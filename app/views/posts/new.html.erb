@@ -1,0 +1,36 @@
+<h1>New Post</h1>
+<%= form_with(model: @post, local: true) do |form| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: 'location_name' %>
+  </div>
+
+  <%= form.hidden_field :latitude %>
+  <%= form.hidden_field :longitude %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<h2>Location Preview</h2>
+<div id="map" style="height: 500px; width: 100%;"></div>
+
+<%= javascript_include_tag 'posts' %>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
