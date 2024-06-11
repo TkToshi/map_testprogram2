@@ -1,6 +1,4 @@
 
-
-
 // loadGoogleMapsApi 関数の定義を追加
 function loadGoogleMapsApi(apiKey, callback) {
   const script = document.createElement('script');
