@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  def index
+  end
+
   def new
     @post = Post.new
     @google_maps_api_key = ENV['GOOGLE_MAPS_API_KEY']
@@ -13,10 +16,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def show
-    @post = Post.find(params[:id])
-    @google_maps_api_key = ENV['GOOGLE_MAPS_API_KEY']
-  end
 
   private
 

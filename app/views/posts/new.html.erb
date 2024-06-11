@@ -33,3 +33,14 @@
 <div id="map" style="height: 500px; width: 100%;"></div>
 
 <%= javascript_include_tag 'posts' %>
+
+<% if @post.persisted? %>
+  <%= link_to "詳細ページ", post_path(@post), class: :prototype__btn %>
+<% end %>
+
+  <i class="fa-solid fa-earth-asia"></i>
+
+
+  <h1>Popup Test</h1>
+    <button id="showPopupButton">Show Popup</button>
+
