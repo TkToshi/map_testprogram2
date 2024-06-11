@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @google_maps_api_key = ENV['GOOGLE_MAPS_API_KEY']
-    @posts = Post.all
+    @posts = Post.find(1) 
   end
 
   def create

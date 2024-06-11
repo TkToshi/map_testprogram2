@@ -29,13 +29,19 @@ document.addEventListener('DOMContentLoaded', function() {
               }
           </style>
           <script>
-              function initMap() {
-                  var mapOptions = {
-                      center: { lat: 35.6895, lng: 139.6917 },
-                      zoom: 8
-                  };
-                  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-              }
+          function initMap() {
+            var mapOptions = {
+                center: { lat: <%= @posts.latitude %>, lng: <%= @posts.longitude %> }, // データから中心座標を設定
+                zoom: 12 // 適切なズームレベルを設定
+            };
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            // マーカーを追加する
+            var marker = new google.maps.Marker({
+                position: { lat: <%= @posts.latitude %>, lng: <%= @posts.longitude %> },
+                map: map
+            });
+        }
           </script>
           <script src="https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap" async defer></script>
       </head>
