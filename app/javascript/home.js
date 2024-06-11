@@ -29,16 +29,34 @@ document.addEventListener('DOMContentLoaded', function() {
               }
           </style>
           <script>
+
           function initMap() {
+            if (typeof window.MyApp === 'undefined' || typeof window.MyApp.postLatitude === 'undefined' || typeof window.MyApp.postLongitude === 'undefined') {
+                console.error("Latitude or longitude not defined in global scope.");
+                return;
+            }
+
+            // グローバル変数として定義されたpostLatitudeとpostLongitudeを使用
+            var latitude = parseFloat(window.MyApp.postLatitude);
+            var longitude = parseFloat(window.MyApp.postLongitude);
+        
+            console.log("Latitude in JS:", latitude);
+            console.log("Longitude in JS:", longitude);
+
+            if (isNaN(latitude) || isNaN(longitude)) {
+                console.error("Invalid latitude or longitude values.");
+                return;
+            }
+        
             var mapOptions = {
-                center: { lat: <%= @posts.latitude %>, lng: <%= @posts.longitude %> }, // データから中心座標を設定
+                center: { lat: latitude, lng: longitude },
                 zoom: 12 // 適切なズームレベルを設定
             };
             var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
             // マーカーを追加する
             var marker = new google.maps.Marker({
-                position: { lat: <%= @posts.latitude %>, lng: <%= @posts.longitude %> },
+                position: { lat: latitude, lng: longitude },
                 map: map
             });
         }

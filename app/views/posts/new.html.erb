@@ -32,7 +32,7 @@
 <h2>Location Preview</h2>
 <div id="map" style="height: 500px; width: 100%;"></div>
 
-<%= javascript_include_tag 'posts' %>
+
 
   <i class="fa-solid fa-earth-asia"></i>
 
@@ -40,3 +40,11 @@
   <h1>Popup Test</h1>
     <button id="showPopupButton">Show Popup</button>
 
+<%= javascript_include_tag 'posts' %>
+
+  <script>
+    window.MyApp = window.MyApp || {};
+    window.MyApp.postLatitude = <%= @place.latitude.to_f %>;
+    window.MyApp.postLongitude = <%= @place.longitude.to_f %>;
+
+    </script>
