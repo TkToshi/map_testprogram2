@@ -31,35 +31,29 @@ document.addEventListener('DOMContentLoaded', function() {
           <script>
 
           function initMap() {
-            if (typeof window.MyApp === 'undefined' || typeof window.MyApp.postLatitude === 'undefined' || typeof window.MyApp.postLongitude === 'undefined') {
-                console.error("Latitude or longitude not defined in global scope.");
-                return;
-            }
-
-            // グローバル変数として定義されたpostLatitudeとpostLongitudeを使用
-            var latitude = parseFloat(window.MyApp.postLatitude);
-            var longitude = parseFloat(window.MyApp.postLongitude);
+            // ポップアップウィンドウで親ウィンドウの変数を使用
+            var latitude = parseFloat(window.opener.MyApp.postLatitude);
+            var longitude = parseFloat(window.opener.MyApp.postLongitude);
         
-            console.log("Latitude in JS:", latitude);
-            console.log("Longitude in JS:", longitude);
-
             if (isNaN(latitude) || isNaN(longitude)) {
                 console.error("Invalid latitude or longitude values.");
                 return;
             }
-        
+
+            console.log("Latitude in JS:", latitude);
+            console.log("Longitude in JS:", longitude);
+
             var mapOptions = {
                 center: { lat: latitude, lng: longitude },
-                zoom: 12 // 適切なズームレベルを設定
+                zoom: 12
             };
             var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-            // マーカーを追加する
             var marker = new google.maps.Marker({
                 position: { lat: latitude, lng: longitude },
                 map: map
             });
-        }
+          }
           </script>
           <script src="https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap" async defer></script>
       </head>
